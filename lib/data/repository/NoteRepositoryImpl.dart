@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:notes_app_clean_arch_flutter/common/constants/error_constants.dart';
 import 'package:notes_app_clean_arch_flutter/common/error/failure.dart';
 import 'package:notes_app_clean_arch_flutter/data/database/DatabaseHelper.dart';
-import 'package:notes_app_clean_arch_flutter/data/model/NoteEntity.dart';
 import 'package:notes_app_clean_arch_flutter/domain/respository/NoteRepository.dart';
+
+import '../../domain/model/NoteModel.dart';
 
 class NoteRepositoryImpl implements NoteRepository {
   DatabaseHelper databaseHelper;
@@ -20,19 +21,21 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, List<NoteEntity>>> getAllNotes() async {
+  Future<Either<Failure, List<NoteModel>>> getAllNotes() async {
     try {
       final result = await databaseHelper.readAllNotes();
-      return Right(result);
+      return Right(result
+          .map((noteEntity) => NoteModel.fromNoteEntity(noteEntity))
+          .toList());
     } catch (e) {
       return const Left(Cachefailure(errorMessage: ErrorConstants.readAllNote));
     }
   }
 
   @override
-  Future<Either<Failure, int>> insertNote(NoteEntity note) async {
+  Future<Either<Failure, int>> insertNote(NoteModel note) async {
     try {
-      final result = await databaseHelper.insertNote(note);
+      final result = await databaseHelper.insertNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
       return const Left(Cachefailure(errorMessage: ErrorConstants.insertNote));
@@ -40,9 +43,9 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, int>> updateNote(NoteEntity note) async {
+  Future<Either<Failure, int>> updateNote(NoteModel note) async {
     try {
-      final result = await databaseHelper.updateNote(note);
+      final result = await databaseHelper.updateNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
       return const Left(Cachefailure(errorMessage: ErrorConstants.updateNote));
