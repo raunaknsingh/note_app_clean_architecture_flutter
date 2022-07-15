@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:notes_app_clean_arch_flutter/common/constants/error_constants.dart';
-import 'package:notes_app_clean_arch_flutter/common/error/failure.dart';
+import 'package:notes_app_clean_arch_flutter/common/constants/ErrorConstants.dart';
+import 'package:notes_app_clean_arch_flutter/common/error/Failure.dart';
 import 'package:notes_app_clean_arch_flutter/data/database/DatabaseHelper.dart';
 import 'package:notes_app_clean_arch_flutter/domain/respository/NoteRepository.dart';
 
@@ -33,8 +33,11 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, int>> insertNote(NoteModel note) async {
+  Future<Either<Failure, int>> insertNote(NoteModel? note) async {
     try {
+      if (note == null)
+        return const Left(
+            GeneralFailure(errorMessage: ErrorConstants.noteNull));
       final result = await databaseHelper.insertNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {

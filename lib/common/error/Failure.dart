@@ -19,3 +19,11 @@ class Cachefailure extends Failure {
   @override
   List<Object?> get props => [errorMessage];
 }
+
+class GeneralFailure extends Failure {
+  final String errorMessage;
+
+  const GeneralFailure({required this.errorMessage});
+  @override
+  List<Object?> get props => [errorMessage];
+}
