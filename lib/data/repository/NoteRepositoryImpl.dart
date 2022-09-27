@@ -35,9 +35,10 @@ class NoteRepositoryImpl implements NoteRepository {
   @override
   Future<Either<Failure, int>> insertNote(NoteModel? note) async {
     try {
-      if (note == null)
+      if (note == null) {
         return const Left(
             GeneralFailure(errorMessage: ErrorConstants.noteNull));
+      }
       final result = await databaseHelper.insertNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
