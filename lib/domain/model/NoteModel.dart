@@ -1,7 +1,7 @@
 import 'package:notes_app_clean_arch_flutter/data/model/NoteEntity.dart';
 
 class NoteModel {
-  final String? id;
+  final int id;
   final String? title;
   final String? description;
   final bool isEdited;

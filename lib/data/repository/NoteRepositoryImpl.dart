@@ -16,7 +16,7 @@ class NoteRepositoryImpl implements NoteRepository {
       final result = await databaseHelper.deleteNote(id);
       return Right(result);
     } catch (e) {
-      return const Left(Cachefailure(errorMessage: ErrorConstants.deleteNote));
+      return const Left(Failure(errorMessage: ErrorConstants.deleteNote));
     }
   }
 
@@ -28,7 +28,7 @@ class NoteRepositoryImpl implements NoteRepository {
           .map((noteEntity) => NoteModel.fromNoteEntity(noteEntity))
           .toList());
     } catch (e) {
-      return const Left(Cachefailure(errorMessage: ErrorConstants.readAllNote));
+      return const Left(Failure(errorMessage: ErrorConstants.readAllNote));
     }
   }
 
@@ -37,12 +37,12 @@ class NoteRepositoryImpl implements NoteRepository {
     try {
       if (note == null) {
         return const Left(
-            GeneralFailure(errorMessage: ErrorConstants.noteNull));
+            Failure(errorMessage: ErrorConstants.noteNull));
       }
       final result = await databaseHelper.insertNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
-      return const Left(Cachefailure(errorMessage: ErrorConstants.insertNote));
+      return const Left(Failure(errorMessage: ErrorConstants.insertNote));
     }
   }
 
@@ -52,7 +52,7 @@ class NoteRepositoryImpl implements NoteRepository {
       final result = await databaseHelper.updateNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
-      return const Left(Cachefailure(errorMessage: ErrorConstants.updateNote));
+      return const Left(Failure(errorMessage: ErrorConstants.updateNote));
     }
   }
 }

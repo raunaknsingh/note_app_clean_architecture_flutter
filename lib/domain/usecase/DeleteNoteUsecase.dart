@@ -5,14 +5,14 @@ import 'package:notes_app_clean_arch_flutter/domain/respository/NoteRepository.d
 import '../../common/error/Failure.dart';
 import '../../common/usecase/Usecase.dart';
 
-class InsertNoteUsecase extends Usecase<int, NoteParams> {
+class DeleteNoteUsecase extends Usecase<int, NoteParams> {
   final NoteRepository _noteRepository;
 
-  InsertNoteUsecase({required NoteRepository noteRepository})
+  DeleteNoteUsecase({required NoteRepository noteRepository})
       : _noteRepository = noteRepository;
 
   @override
   Future<Either<Failure, int>> call(NoteParams params) async {
-    return await _noteRepository.insertNote(params.note);
+    return await _noteRepository.deleteNote(params.note.id);
   }
 }
