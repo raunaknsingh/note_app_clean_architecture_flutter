@@ -30,7 +30,7 @@ class TextInputComponent extends StatelessWidget {
             return _inputDescription;
           }
         },
-        onSaved: (input) {
+        onChanged: (input) {
           onInputSaved(input);
         },
       ),

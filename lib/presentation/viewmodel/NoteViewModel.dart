@@ -20,6 +20,10 @@ class NoteViewModel extends ChangeNotifier {
   UserError? _userError;
   UserError? get userError => _userError;
 
+  NoteViewModel() {
+    getAllNotes();
+  }
+
   final InsertNoteUsecase _insertNoteUseCase = InsertNoteUsecase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
@@ -50,38 +54,38 @@ class NoteViewModel extends ChangeNotifier {
   }
 
   insertNote(NoteModel note) async {
-    setLoading(false);
+    setLoading(true);
     var response = await _insertNoteUseCase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
-    setLoading(true);
+    setLoading(false);
   }
 
   getAllNotes() async {
-    setLoading(false);
+    setLoading(true);
     var response = await _getAllNoteUsecase.call(NoParams());
     refreshNoteListOrShowError(response);
-    setLoading(true);
+    setLoading(false);
   }
 
   updateNote(NoteModel note) async {
-    setLoading(false);
+    setLoading(true);
     var response = await _updateNoteUsecase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
-    setLoading(true);
+    setLoading(false);
   }
 
   deleteNote(NoteModel note) async {
-    setLoading(false);
+    setLoading(true);
     var response = await _deleteNoteUsecase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
-    setLoading(true);
+    setLoading(false);
   }
 
   refreshNoteListOrShowError(dynamic response) {
     response.fold((l) {
       setUserError(UserError(errorMessage: l.errorMessage));
     }, (r) {
-      setNoteList(noteList);
+      setNoteList(r);
     });
   }
 }

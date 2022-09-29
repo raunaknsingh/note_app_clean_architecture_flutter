@@ -3,6 +3,7 @@ import 'package:notes_app_clean_arch_flutter/common/components/SaveButton.dart';
 import 'package:notes_app_clean_arch_flutter/common/components/TextInputComponent.dart';
 import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.dart';
 import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
+import 'package:notes_app_clean_arch_flutter/navigation_utils.dart';
 import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,7 @@ class AddEditNoteScreen extends StatelessWidget {
             _buildNoteIdInput(),
             _buildTitleInput(),
             _buildDescriptionInput(),
-            _buildSaveButton(noteViewModel),
+            _buildSaveButton(noteViewModel, context),
           ],
         ),
       ),
@@ -67,7 +68,7 @@ class AddEditNoteScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSaveButton(NoteViewModel noteViewModel) {
+  Widget _buildSaveButton(NoteViewModel noteViewModel, BuildContext context) {
     return SaveButton(onBtnTap: () {
       noteViewModel.insertNote(
         NoteModel(
@@ -76,6 +77,7 @@ class AddEditNoteScreen extends StatelessWidget {
             description: _noteDesc,
             isEdited: _isEdited),
       );
+      closeAddNoteScreen(context);
     });
   }
 }

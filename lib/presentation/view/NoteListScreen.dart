@@ -22,16 +22,58 @@ class _NoteListScreenState extends State<NoteListScreen> {
       ),
       // body: _populateNoteList(noteViewModel),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           openAddNoteScreen(context);
-          // noteViewModel.insertNote(NoteMode())
         },
       ),
+      body: noteViewModel.isLoading
+          ? Center(child: const CircularProgressIndicator())
+          : noteViewModel.noteList.isEmpty
+              ? Center(
+                  child: Text(
+                    'No notes present',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.grey),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: noteViewModel.noteList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                          color: Colors.purple),
+                      child: Column(
+                        children: [
+                          Text(
+                            noteViewModel.noteList[index].id.toString(),
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            noteViewModel.noteList[index].title ?? '',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            noteViewModel.noteList[index].description ?? '',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
     );
   }
-
-  // _populateNoteList(NoteViewModel noteViewModel) async {
-  //   noteViewModel.in
-  // }
 }

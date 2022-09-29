@@ -9,3 +9,7 @@ void openAddNoteScreen(BuildContext context) {
     ),
   );
 }
+
+void closeAddNoteScreen(BuildContext context) {
+  Navigator.pop(context);
+}
