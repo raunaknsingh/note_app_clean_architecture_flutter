@@ -20,19 +20,19 @@ class NoteViewModel extends ChangeNotifier {
   UserError? _userError;
   UserError? get userError => _userError;
 
-  InsertNoteUsecase insertNoteUseCase = InsertNoteUsecase(
+  final InsertNoteUsecase _insertNoteUseCase = InsertNoteUsecase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  GetAllNoteUsecase getAllNoteUsecase = GetAllNoteUsecase(
+  final GetAllNoteUsecase _getAllNoteUsecase = GetAllNoteUsecase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  DeleteNoteUsecase deleteNoteUsecase = DeleteNoteUsecase(
+  final DeleteNoteUsecase _deleteNoteUsecase = DeleteNoteUsecase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  UpdateNoteUsecase updateNoteUsecase = UpdateNoteUsecase(
+  final UpdateNoteUsecase _updateNoteUsecase = UpdateNoteUsecase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
@@ -51,28 +51,28 @@ class NoteViewModel extends ChangeNotifier {
 
   insertNote(NoteModel note) async {
     setLoading(false);
-    var response = await insertNoteUseCase.call(NoteParams(note));
+    var response = await _insertNoteUseCase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
     setLoading(true);
   }
 
   getAllNotes() async {
     setLoading(false);
-    var response = await getAllNoteUsecase.call(NoParams());
+    var response = await _getAllNoteUsecase.call(NoParams());
     refreshNoteListOrShowError(response);
     setLoading(true);
   }
 
   updateNote(NoteModel note) async {
     setLoading(false);
-    var response = await updateNoteUsecase.call(NoteParams(note));
+    var response = await _updateNoteUsecase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
     setLoading(true);
   }
 
   deleteNote(NoteModel note) async {
     setLoading(false);
-    var response = await deleteNoteUsecase.call(NoteParams(note));
+    var response = await _deleteNoteUsecase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
     setLoading(true);
   }
