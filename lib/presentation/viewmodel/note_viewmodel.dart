@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_clean_arch_flutter/common/error/UserError.dart';
-import 'package:notes_app_clean_arch_flutter/common/params/NoParams.dart';
-import 'package:notes_app_clean_arch_flutter/common/params/NoteParams.dart';
-import 'package:notes_app_clean_arch_flutter/data/database/DatabaseHelper.dart';
-import 'package:notes_app_clean_arch_flutter/data/repository/NoteRepositoryImpl.dart';
-import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
-import 'package:notes_app_clean_arch_flutter/domain/usecase/DeleteNoteUsecase.dart';
-import 'package:notes_app_clean_arch_flutter/domain/usecase/InsertNoteUsecase.dart';
-import 'package:notes_app_clean_arch_flutter/domain/usecase/GetAllNoteUsecase.dart';
-import 'package:notes_app_clean_arch_flutter/domain/usecase/UpdateNoteUsecase.dart';
+import 'package:notes_app_clean_arch_flutter/common/error/user_error.dart';
+import 'package:notes_app_clean_arch_flutter/common/params/no_params.dart';
+import 'package:notes_app_clean_arch_flutter/common/params/note_params.dart';
+import 'package:notes_app_clean_arch_flutter/data/database/database_helper.dart';
+import 'package:notes_app_clean_arch_flutter/data/repository/note_repository_impl.dart';
+import 'package:notes_app_clean_arch_flutter/domain/model/note_model.dart';
+import 'package:notes_app_clean_arch_flutter/domain/usecase/delete_note_usecase.dart';
+import 'package:notes_app_clean_arch_flutter/domain/usecase/insert_note_usecase.dart';
+import 'package:notes_app_clean_arch_flutter/domain/usecase/get_all_note_usecase.dart';
+import 'package:notes_app_clean_arch_flutter/domain/usecase/update_note_usecase.dart';
 
 class NoteViewModel extends ChangeNotifier {
   bool _isLoading = false;
@@ -27,19 +27,19 @@ class NoteViewModel extends ChangeNotifier {
     getAllNotes();
   }
 
-  final InsertNoteUsecase _insertNoteUseCase = InsertNoteUsecase(
+  final InsertNoteUseCase _insertNoteUseCase = InsertNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final GetAllNoteUsecase _getAllNoteUsecase = GetAllNoteUsecase(
+  final GetAllNoteUseCase _getAllNoteUsecase = GetAllNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final DeleteNoteUsecase _deleteNoteUsecase = DeleteNoteUsecase(
+  final DeleteNoteUseCase _deleteNoteUsecase = DeleteNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final UpdateNoteUsecase _updateNoteUsecase = UpdateNoteUsecase(
+  final UpdateNoteUseCase _updateNoteUsecase = UpdateNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 

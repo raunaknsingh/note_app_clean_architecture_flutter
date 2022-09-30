@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.dart';
-import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
-import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
+import 'package:notes_app_clean_arch_flutter/common/constants/string_constants.dart';
+import 'package:notes_app_clean_arch_flutter/domain/model/note_model.dart';
+import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/note_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/components/NoteItemComponent.dart';
+import '../../common/components/note_item_component.dart';
 import '../../navigation_utils.dart';
 
 class NoteListScreen extends StatefulWidget {
@@ -18,10 +18,10 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     NoteViewModel noteViewModel = context.watch<NoteViewModel>();
-    final List<NoteModel> notesList = noteViewModel.noteList;
+    final List<NoteModel> notesListModel = noteViewModel.noteList;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(NOTES_LIST),
+        title: const Text(notesList),
       ),
       // body: _populateNoteList(noteViewModel),
       floatingActionButton: FloatingActionButton(
@@ -32,11 +32,11 @@ class _NoteListScreenState extends State<NoteListScreen> {
         },
       ),
       body: noteViewModel.isLoading
-          ? Center(child: const CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : notesList.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
-                    'No notes present',
+                    noNotesPresent,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -52,7 +52,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       onDismissed: (direction) {
                         noteViewModel.deleteNote(noteViewModel.noteList[index]);
                         setState(() {
-                          notesList.removeAt(index);
+                          notesListModel.removeAt(index);
                         });
                       },
                       child: GestureDetector(

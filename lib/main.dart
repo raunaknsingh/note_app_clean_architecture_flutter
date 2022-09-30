@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_clean_arch_flutter/presentation/view/NoteListScreen.dart';
-import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
+import 'package:notes_app_clean_arch_flutter/common/constants/string_constants.dart';
+import 'package:notes_app_clean_arch_flutter/presentation/view/note_list_screen.dart';
+import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/note_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -16,11 +17,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => NoteViewModel())],
       child: MaterialApp(
-        title: 'NoteApp clean arch',
+        title: noteAppCleanArch,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: NoteListScreen(),
+        home: const NoteListScreen(),
       ),
     );
   }

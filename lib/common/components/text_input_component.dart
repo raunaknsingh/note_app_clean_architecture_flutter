@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-@immutable
 class TextInputComponent extends StatelessWidget {
   final Function onInputSaved;
   final TextInputType? _textInputType;
@@ -8,15 +7,15 @@ class TextInputComponent extends StatelessWidget {
   final String _inputError;
   String? _noteData;
   final bool? _isEnabled;
-  TextInputComponent(
-      {Key? key,
-      required this.onInputSaved,
-      required String inputTitle,
-      required String inputError,
-      TextInputType? textInputType,
-      String? noteData,
-      bool? isEnabled})
-      : _inputTitle = inputTitle,
+  TextInputComponent({
+    Key? key,
+    required this.onInputSaved,
+    required String inputTitle,
+    required String inputError,
+    TextInputType? textInputType,
+    String? noteData,
+    bool? isEnabled,
+  })  : _inputTitle = inputTitle,
         _inputError = inputError,
         _textInputType = textInputType,
         _noteData = noteData,
@@ -34,9 +33,11 @@ class TextInputComponent extends StatelessWidget {
           labelText: _inputTitle,
         ),
         validator: (input) {
-          if (input?.isEmpty == true && _noteData?.isEmpty == true) {
+          if ((input == null || input.isEmpty == true) &&
+              (_noteData == null || _noteData?.isEmpty == true)) {
             return _inputError;
           }
+          return null;
         },
         onChanged: (input) {
           _noteData = input;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_clean_arch_flutter/common/components/SaveButton.dart';
-import 'package:notes_app_clean_arch_flutter/common/components/TextInputComponent.dart';
-import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.dart';
-import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
+import 'package:notes_app_clean_arch_flutter/common/components/save_button.dart';
+import 'package:notes_app_clean_arch_flutter/common/components/text_input_component.dart';
+import 'package:notes_app_clean_arch_flutter/common/constants/string_constants.dart';
+import 'package:notes_app_clean_arch_flutter/domain/model/note_model.dart';
 import 'package:notes_app_clean_arch_flutter/navigation_utils.dart';
-import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
+import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/note_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class AddEditNoteScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class AddEditNoteScreen extends StatelessWidget {
     setNoteData();
     return Scaffold(
       appBar: AppBar(
-        title: _selectedNote == null ? Text(ADD_NOTE) : Text(EDIT_NOTE),
+        title: _selectedNote == null ? Text(addNote) : Text(editNote),
       ),
       body: Form(
         key: _formKey,
@@ -45,8 +45,8 @@ class AddEditNoteScreen extends StatelessWidget {
         _noteId = input;
       },
       textInputType: TextInputType.number,
-      inputTitle: NOTE_ID,
-      inputError: ENTER_NOTE_ID,
+      inputTitle: noteId,
+      inputError: enterNoteId,
       noteData: _selectedNote?.id.toString(),
       isEnabled: _selectedNote == null ? true : false,
     );
@@ -57,8 +57,8 @@ class AddEditNoteScreen extends StatelessWidget {
         onInputSaved: (input) {
           _noteTitle = input;
         },
-        inputTitle: NOTE_TITLE,
-        inputError: ENTER_NOTE_TITLE,
+        inputTitle: noteTitle,
+        inputError: enterNoteTitle,
         noteData: _selectedNote?.title.toString());
   }
 
@@ -67,8 +67,8 @@ class AddEditNoteScreen extends StatelessWidget {
         onInputSaved: (input) {
           _noteDesc = input;
         },
-        inputTitle: NOTE_DESCRIPTION,
-        inputError: ENTER_NOTE_DESCRIPTION,
+        inputTitle: noteDescription,
+        inputError: enterNoteDescription,
         noteData: _selectedNote?.description.toString());
   }
 
@@ -96,7 +96,7 @@ class AddEditNoteScreen extends StatelessWidget {
           closeAddNoteScreen(context);
         }
       },
-      btnText: _selectedNote == null ? ADD_NOTE : EDIT_NOTE,
+      btnText: _selectedNote == null ? addNote : editNote,
     );
   }
 

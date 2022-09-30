@@ -1,4 +1,4 @@
-import 'package:notes_app_clean_arch_flutter/data/model/NoteEntity.dart';
+import 'package:notes_app_clean_arch_flutter/data/model/note_entity.dart';
 
 class NoteModel {
   final int id;

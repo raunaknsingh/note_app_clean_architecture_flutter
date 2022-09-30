@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:notes_app_clean_arch_flutter/common/constants/ErrorConstants.dart';
-import 'package:notes_app_clean_arch_flutter/common/error/Failure.dart';
-import 'package:notes_app_clean_arch_flutter/data/database/DatabaseHelper.dart';
-import 'package:notes_app_clean_arch_flutter/domain/respository/NoteRepository.dart';
+import 'package:notes_app_clean_arch_flutter/common/error/failure.dart';
+import 'package:notes_app_clean_arch_flutter/data/database/database_helper.dart';
+import 'package:notes_app_clean_arch_flutter/domain/respository/note_repository.dart';
 
-import '../../domain/model/NoteModel.dart';
+import '../../common/constants/string_constants.dart';
+import '../../domain/model/note_model.dart';
 
 class NoteRepositoryImpl implements NoteRepository {
   DatabaseHelper databaseHelper;
@@ -16,7 +16,7 @@ class NoteRepositoryImpl implements NoteRepository {
       final result = await databaseHelper.deleteNote(id);
       return Right(result);
     } catch (e) {
-      return const Left(Failure(errorMessage: ErrorConstants.deleteNote));
+      return const Left(Failure(errorMessage: deleteNoteError));
     }
   }
 
@@ -28,7 +28,7 @@ class NoteRepositoryImpl implements NoteRepository {
           .map((noteEntity) => NoteModel.fromNoteEntity(noteEntity))
           .toList());
     } catch (e) {
-      return const Left(Failure(errorMessage: ErrorConstants.readAllNote));
+      return const Left(Failure(errorMessage: readAllNoteError));
     }
   }
 
@@ -36,13 +36,12 @@ class NoteRepositoryImpl implements NoteRepository {
   Future<Either<Failure, int>> insertNote(NoteModel? note) async {
     try {
       if (note == null) {
-        return const Left(
-            Failure(errorMessage: ErrorConstants.noteNull));
+        return const Left(Failure(errorMessage: noteNullError));
       }
       final result = await databaseHelper.insertNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
-      return const Left(Failure(errorMessage: ErrorConstants.insertNote));
+      return const Left(Failure(errorMessage: insertNoteError));
     }
   }
 
@@ -52,7 +51,7 @@ class NoteRepositoryImpl implements NoteRepository {
       final result = await databaseHelper.updateNote(note.toNoteEntity(note));
       return Right(result);
     } catch (e) {
-      return const Left(Failure(errorMessage: ErrorConstants.updateNote));
+      return const Left(Failure(errorMessage: updateNoteError));
     }
   }
 }

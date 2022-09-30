@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
+import 'package:notes_app_clean_arch_flutter/domain/model/note_model.dart';
 
-import '../../common/error/Failure.dart';
+import '../../common/error/failure.dart';
 
 abstract class NoteRepository {
   Future<Either<Failure, int>> insertNote(NoteModel? note);
