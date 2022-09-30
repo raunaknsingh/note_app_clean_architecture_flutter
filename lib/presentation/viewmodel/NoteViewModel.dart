@@ -78,10 +78,7 @@ class NoteViewModel extends ChangeNotifier {
   }
 
   deleteNote(NoteModel note) async {
-    setLoading(true);
-    var response = await _deleteNoteUsecase.call(NoteParams(note));
-    refreshNoteListOrShowError(response);
-    setLoading(false);
+    await _deleteNoteUsecase.call(NoteParams(note));
   }
 
   refreshNoteListOrShowError(dynamic response) {

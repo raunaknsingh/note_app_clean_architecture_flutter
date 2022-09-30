@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.dart';
+import 'package:notes_app_clean_arch_flutter/domain/model/NoteModel.dart';
 import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     NoteViewModel noteViewModel = context.watch<NoteViewModel>();
+    final List<NoteModel> notesList = noteViewModel.noteList;
     return Scaffold(
       appBar: AppBar(
         title: const Text(NOTES_LIST),
@@ -30,7 +32,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       ),
       body: noteViewModel.isLoading
           ? Center(child: const CircularProgressIndicator())
-          : noteViewModel.noteList.isEmpty
+          : notesList.isEmpty
               ? Center(
                   child: Text(
                     'No notes present',
@@ -43,20 +45,30 @@ class _NoteListScreenState extends State<NoteListScreen> {
               : ListView.builder(
                   itemCount: noteViewModel.noteList.length,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        noteViewModel
-                            .setSelectedNoteItem(noteViewModel.noteList[index]);
-                        openAddNoteScreen(
-                          context,
-                        );
+                    final item = noteViewModel.noteList[index].id.toString();
+                    return Dismissible(
+                      key: Key(item),
+                      onDismissed: (direction) {
+                        noteViewModel.deleteNote(noteViewModel.noteList[index]);
+                        setState(() {
+                          notesList.removeAt(index);
+                        });
                       },
-                      child: NoteItemComponent(
-                        noteId: noteViewModel.noteList[index].id.toString(),
-                        noteTitle: noteViewModel.noteList[index].title ?? '',
-                        noteDescription:
-                            noteViewModel.noteList[index].description ?? '',
-                        isNoteEdited: noteViewModel.noteList[index].isEdited,
+                      child: GestureDetector(
+                        onTap: () {
+                          noteViewModel.setSelectedNoteItem(
+                              noteViewModel.noteList[index]);
+                          openAddNoteScreen(
+                            context,
+                          );
+                        },
+                        child: NoteItemComponent(
+                          noteId: noteViewModel.noteList[index].id.toString(),
+                          noteTitle: noteViewModel.noteList[index].title ?? '',
+                          noteDescription:
+                              noteViewModel.noteList[index].description ?? '',
+                          isNoteEdited: noteViewModel.noteList[index].isEdited,
+                        ),
                       ),
                     );
                   },
