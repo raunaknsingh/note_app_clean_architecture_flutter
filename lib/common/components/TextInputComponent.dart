@@ -7,21 +7,27 @@ class TextInputComponent extends StatelessWidget {
   final String _inputTitle;
   final String _inputDescription;
   final String? _noteData;
-  TextInputComponent(
-      {required this.onInputSaved,
+  final bool? _isEnabled;
+  const TextInputComponent(
+      {Key? key,
+      required this.onInputSaved,
       required String inputTitle,
       required String inputDescription,
       TextInputType? textInputType,
-      String? noteData})
+      String? noteData,
+      bool? isEnabled})
       : _inputTitle = inputTitle,
         _inputDescription = inputDescription,
         _textInputType = textInputType,
-        _noteData = noteData;
+        _noteData = noteData,
+        _isEnabled = isEnabled,
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
+        enabled: _isEnabled,
         initialValue: _noteData,
         keyboardType: _textInputType ?? TextInputType.text,
         decoration: InputDecoration(

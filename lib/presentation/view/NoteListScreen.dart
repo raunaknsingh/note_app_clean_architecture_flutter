@@ -58,7 +58,8 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       child: GestureDetector(
                         onTap: () {
                           noteViewModel.setSelectedNoteItem(
-                              noteViewModel.noteList[index]);
+                            noteViewModel.noteList[index],
+                          );
                           openAddNoteScreen(
                             context,
                           );

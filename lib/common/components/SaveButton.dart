@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.dart';
 
 class SaveButton extends StatelessWidget {
   final VoidCallback onBtnTap;
+  final String btnText;
 
-  SaveButton({required this.onBtnTap});
+  const SaveButton({Key? key, required this.onBtnTap, required this.btnText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onBtnTap,
-      child: const Text(SAVE_NOTE),
+      child: Text(btnText),
     );
   }
 }
