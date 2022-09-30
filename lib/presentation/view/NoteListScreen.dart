@@ -3,6 +3,7 @@ import 'package:notes_app_clean_arch_flutter/common/constants/StringConstants.da
 import 'package:notes_app_clean_arch_flutter/presentation/viewmodel/NoteViewModel.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/components/NoteItemComponent.dart';
 import '../../navigation_utils.dart';
 
 class NoteListScreen extends StatefulWidget {
@@ -42,41 +43,20 @@ class _NoteListScreenState extends State<NoteListScreen> {
               : ListView.builder(
                   itemCount: noteViewModel.noteList.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                          color: Colors.purple),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              noteViewModel.noteList[index].id.toString(),
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              noteViewModel.noteList[index].title ?? '',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              noteViewModel.noteList[index].description ?? '',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          ],
-                        ),
+                    return GestureDetector(
+                      onTap: () {
+                        noteViewModel
+                            .setSelectedNoteItem(noteViewModel.noteList[index]);
+                        openAddNoteScreen(
+                          context,
+                        );
+                      },
+                      child: NoteItemComponent(
+                        noteId: noteViewModel.noteList[index].id.toString(),
+                        noteTitle: noteViewModel.noteList[index].title ?? '',
+                        noteDescription:
+                            noteViewModel.noteList[index].description ?? '',
+                        isNoteEdited: noteViewModel.noteList[index].isEdited,
                       ),
                     );
                   },

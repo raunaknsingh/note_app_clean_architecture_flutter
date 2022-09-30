@@ -13,12 +13,14 @@ class AddEditNoteScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   String _noteTitle = '';
   String _noteDesc = '';
-  bool _isEdited = false;
   String _noteId = '';
+  NoteModel? _selectedNote;
 
   @override
   Widget build(BuildContext context) {
     NoteViewModel noteViewModel = context.watch<NoteViewModel>();
+    _selectedNote = noteViewModel.selectedNote;
+    setNoteData();
     return Scaffold(
       appBar: AppBar(
         title: Text(ADD_NOTE),
@@ -45,41 +47,61 @@ class AddEditNoteScreen extends StatelessWidget {
       textInputType: TextInputType.number,
       inputTitle: NOTE_ID,
       inputDescription: ENTER_NOTE_ID,
+      noteData: _selectedNote?.id.toString(),
     );
   }
 
   Widget _buildTitleInput() {
     return TextInputComponent(
-      onInputSaved: (input) {
-        _noteTitle = input;
-      },
-      inputTitle: NOTE_TITLE,
-      inputDescription: ENTER_NOTE_TITLE,
-    );
+        onInputSaved: (input) {
+          _noteTitle = input;
+        },
+        inputTitle: NOTE_TITLE,
+        inputDescription: ENTER_NOTE_TITLE,
+        noteData: _selectedNote?.title.toString());
   }
 
   Widget _buildDescriptionInput() {
     return TextInputComponent(
-      onInputSaved: (input) {
-        _noteDesc = input;
-      },
-      inputTitle: NOTE_DESCRIPTION,
-      inputDescription: ENTER_NOTE_DESCRIPTION,
-    );
+        onInputSaved: (input) {
+          _noteDesc = input;
+        },
+        inputTitle: NOTE_DESCRIPTION,
+        inputDescription: ENTER_NOTE_DESCRIPTION,
+        noteData: _selectedNote?.description.toString());
   }
 
   Widget _buildSaveButton(NoteViewModel noteViewModel, BuildContext context) {
     return SaveButton(onBtnTap: () {
       if (_formKey.currentState!.validate()) {
-        noteViewModel.insertNote(
-          NoteModel(
-              id: int.parse(_noteId),
-              title: _noteTitle,
-              description: _noteDesc,
-              isEdited: _isEdited),
-        );
+        _selectedNote == null
+            ? noteViewModel.insertNote(
+                NoteModel(
+                  id: int.parse(_noteId),
+                  title: _noteTitle,
+                  description: _noteDesc,
+                  isEdited: false,
+                ),
+              )
+            : noteViewModel.updateNote(
+                NoteModel(
+                  id: int.parse(_noteId),
+                  title: _noteTitle,
+                  description: _noteDesc,
+                  isEdited: true,
+                ),
+              );
         closeAddNoteScreen(context);
       }
     });
+  }
+
+  void setNoteData() {
+    if (_selectedNote == null) {
+      return;
+    }
+    _noteId = _selectedNote!.id.toString();
+    _noteTitle = _selectedNote!.title!;
+    _noteDesc = _selectedNote!.description!;
   }
 }

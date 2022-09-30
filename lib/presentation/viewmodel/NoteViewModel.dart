@@ -20,6 +20,9 @@ class NoteViewModel extends ChangeNotifier {
   UserError? _userError;
   UserError? get userError => _userError;
 
+  NoteModel? _selectedNote;
+  NoteModel? get selectedNote => _selectedNote;
+
   NoteViewModel() {
     getAllNotes();
   }
@@ -91,5 +94,9 @@ class NoteViewModel extends ChangeNotifier {
         getAllNotes();
       }
     });
+  }
+
+  setSelectedNoteItem(NoteModel noteModel) {
+    _selectedNote = noteModel;
   }
 }
