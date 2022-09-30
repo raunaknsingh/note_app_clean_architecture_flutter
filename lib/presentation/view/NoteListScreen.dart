@@ -49,27 +49,34 @@ class _NoteListScreenState extends State<NoteListScreen> {
                             Radius.circular(8),
                           ),
                           color: Colors.purple),
-                      child: Column(
-                        children: [
-                          Text(
-                            noteViewModel.noteList[index].id.toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            noteViewModel.noteList[index].title ?? '',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            noteViewModel.noteList[index].description ?? '',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              noteViewModel.noteList[index].id.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              noteViewModel.noteList[index].title ?? '',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              noteViewModel.noteList[index].description ?? '',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

@@ -85,7 +85,11 @@ class NoteViewModel extends ChangeNotifier {
     response.fold((l) {
       setUserError(UserError(errorMessage: l.errorMessage));
     }, (r) {
-      setNoteList(r);
+      if (r is List<NoteModel>) {
+        setNoteList(r);
+      } else {
+        getAllNotes();
+      }
     });
   }
 }
