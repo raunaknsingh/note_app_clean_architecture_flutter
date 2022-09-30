@@ -38,7 +38,8 @@ class DatabaseHelper {
 
   Future<int> insertNote(NoteEntity note) async {
     Database db = await instance.database;
-    return await db.insert(_tableName, note.toJson());
+    return await db.insert(_tableName, note.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<NoteEntity>> readAllNotes() async {
@@ -50,7 +51,9 @@ class DatabaseHelper {
   Future<int> updateNote(NoteEntity note) async {
     Database db = await instance.database;
     return await db.update(_tableName, note.toJson(),
-        where: '${NoteFields.columnId} = ?', whereArgs: [note.id]);
+        where: '${NoteFields.columnId} = ?',
+        whereArgs: [note.id],
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> deleteNote(int id) async {

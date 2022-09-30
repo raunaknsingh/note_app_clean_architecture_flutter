@@ -93,7 +93,7 @@ class NoteViewModel extends ChangeNotifier {
     });
   }
 
-  setSelectedNoteItem(NoteModel noteModel) {
+  setSelectedNoteItem(NoteModel? noteModel) {
     _selectedNote = noteModel;
   }
 }

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 @immutable
 class NoteItemComponent extends StatelessWidget {
-  final _noteId;
-  final _noteTitle;
-  final _noteDescription;
-  final _isNoteEdited;
+  final String _noteId;
+  final String _noteTitle;
+  final String _noteDescription;
+  final bool _isNoteEdited;
 
   const NoteItemComponent(
       {Key? key,

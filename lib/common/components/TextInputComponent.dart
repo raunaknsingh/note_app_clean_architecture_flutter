@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../constants/StringConstants.dart';
-
 @immutable
 class TextInputComponent extends StatelessWidget {
   final Function onInputSaved;
-  final _textInputType;
-  final _inputTitle;
-  final _inputDescription;
+  final TextInputType? _textInputType;
+  final String _inputTitle;
+  final String _inputDescription;
   final String? _noteData;
   TextInputComponent(
       {required this.onInputSaved,

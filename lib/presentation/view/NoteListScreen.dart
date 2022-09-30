@@ -27,6 +27,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
+          noteViewModel.setSelectedNoteItem(null);
           openAddNoteScreen(context);
         },
       ),

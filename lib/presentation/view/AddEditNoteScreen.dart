@@ -14,6 +14,7 @@ class AddEditNoteScreen extends StatelessWidget {
   String _noteTitle = '';
   String _noteDesc = '';
   String _noteId = '';
+  bool _isNoteEdited = false;
   NoteModel? _selectedNote;
 
   @override
@@ -23,7 +24,7 @@ class AddEditNoteScreen extends StatelessWidget {
     setNoteData();
     return Scaffold(
       appBar: AppBar(
-        title: Text(ADD_NOTE),
+        title: _isNoteEdited ? Text(EDIT_NOTE) : Text(ADD_NOTE),
       ),
       body: Form(
         key: _formKey,
@@ -103,5 +104,6 @@ class AddEditNoteScreen extends StatelessWidget {
     _noteId = _selectedNote!.id.toString();
     _noteTitle = _selectedNote!.title!;
     _noteDesc = _selectedNote!.description!;
+    _isNoteEdited = _selectedNote!.isEdited;
   }
 }
