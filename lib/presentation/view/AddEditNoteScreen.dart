@@ -46,7 +46,7 @@ class AddEditNoteScreen extends StatelessWidget {
       },
       textInputType: TextInputType.number,
       inputTitle: NOTE_ID,
-      inputDescription: ENTER_NOTE_ID,
+      inputError: ENTER_NOTE_ID,
       noteData: _selectedNote?.id.toString(),
       isEnabled: _selectedNote == null ? true : false,
     );
@@ -58,7 +58,7 @@ class AddEditNoteScreen extends StatelessWidget {
           _noteTitle = input;
         },
         inputTitle: NOTE_TITLE,
-        inputDescription: ENTER_NOTE_TITLE,
+        inputError: ENTER_NOTE_TITLE,
         noteData: _selectedNote?.title.toString());
   }
 
@@ -68,7 +68,7 @@ class AddEditNoteScreen extends StatelessWidget {
           _noteDesc = input;
         },
         inputTitle: NOTE_DESCRIPTION,
-        inputDescription: ENTER_NOTE_DESCRIPTION,
+        inputError: ENTER_NOTE_DESCRIPTION,
         noteData: _selectedNote?.description.toString());
   }
 

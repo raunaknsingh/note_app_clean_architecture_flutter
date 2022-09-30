@@ -5,19 +5,19 @@ class TextInputComponent extends StatelessWidget {
   final Function onInputSaved;
   final TextInputType? _textInputType;
   final String _inputTitle;
-  final String _inputDescription;
-  final String? _noteData;
+  final String _inputError;
+  String? _noteData;
   final bool? _isEnabled;
-  const TextInputComponent(
+  TextInputComponent(
       {Key? key,
       required this.onInputSaved,
       required String inputTitle,
-      required String inputDescription,
+      required String inputError,
       TextInputType? textInputType,
       String? noteData,
       bool? isEnabled})
       : _inputTitle = inputTitle,
-        _inputDescription = inputDescription,
+        _inputError = inputError,
         _textInputType = textInputType,
         _noteData = noteData,
         _isEnabled = isEnabled,
@@ -35,10 +35,11 @@ class TextInputComponent extends StatelessWidget {
         ),
         validator: (input) {
           if (input?.isEmpty == true && _noteData?.isEmpty == true) {
-            return _inputDescription;
+            return _inputError;
           }
         },
         onChanged: (input) {
+          _noteData = input;
           onInputSaved(input);
         },
       ),
