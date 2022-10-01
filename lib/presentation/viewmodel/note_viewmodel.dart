@@ -31,15 +31,15 @@ class NoteViewModel extends ChangeNotifier {
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final GetAllNoteUseCase _getAllNoteUsecase = GetAllNoteUseCase(
+  final GetAllNoteUseCase _getAllNoteUseCase = GetAllNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final DeleteNoteUseCase _deleteNoteUsecase = DeleteNoteUseCase(
+  final DeleteNoteUseCase _deleteNoteUseCase = DeleteNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
-  final UpdateNoteUseCase _updateNoteUsecase = UpdateNoteUseCase(
+  final UpdateNoteUseCase _updateNoteUseCase = UpdateNoteUseCase(
     noteRepository: NoteRepositoryImpl(databaseHelper: DatabaseHelper.instance),
   );
 
@@ -65,20 +65,20 @@ class NoteViewModel extends ChangeNotifier {
 
   getAllNotes() async {
     setLoading(true);
-    var response = await _getAllNoteUsecase.call(NoParams());
+    var response = await _getAllNoteUseCase.call(NoParams());
     refreshNoteListOrShowError(response);
     setLoading(false);
   }
 
   updateNote(NoteModel note) async {
     setLoading(true);
-    var response = await _updateNoteUsecase.call(NoteParams(note));
+    var response = await _updateNoteUseCase.call(NoteParams(note));
     refreshNoteListOrShowError(response);
     setLoading(false);
   }
 
   deleteNote(NoteModel note) async {
-    await _deleteNoteUsecase.call(NoteParams(note));
+    await _deleteNoteUseCase.call(NoteParams(note));
   }
 
   refreshNoteListOrShowError(dynamic response) {

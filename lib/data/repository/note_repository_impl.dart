@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:notes_app_clean_arch_flutter/common/error/failure.dart';
 import 'package:notes_app_clean_arch_flutter/data/database/database_helper.dart';
-import 'package:notes_app_clean_arch_flutter/domain/respository/note_repository.dart';
 
 import '../../common/constants/string_constants.dart';
 import '../../domain/model/note_model.dart';
+import '../../domain/repository/note_repository.dart';
 
 class NoteRepositoryImpl implements NoteRepository {
   DatabaseHelper databaseHelper;

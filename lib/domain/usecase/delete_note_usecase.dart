@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:notes_app_clean_arch_flutter/common/params/note_params.dart';
-import 'package:notes_app_clean_arch_flutter/domain/respository/note_repository.dart';
 
 import '../../common/error/failure.dart';
 import '../../common/usecase/usecase.dart';
+import '../repository/note_repository.dart';
 
 class DeleteNoteUseCase extends UseCase<int, NoteParams> {
   final NoteRepository _noteRepository;

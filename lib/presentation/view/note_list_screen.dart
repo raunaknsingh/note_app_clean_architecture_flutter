@@ -33,7 +33,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       ),
       body: noteViewModel.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : notesList.isEmpty
+          : notesListModel.isEmpty
               ? const Center(
                   child: Text(
                     noNotesPresent,

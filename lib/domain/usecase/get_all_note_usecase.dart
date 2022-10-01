@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:notes_app_clean_arch_flutter/common/params/no_params.dart';
-import 'package:notes_app_clean_arch_flutter/common/params/note_params.dart';
 import 'package:notes_app_clean_arch_flutter/domain/model/note_model.dart';
-import 'package:notes_app_clean_arch_flutter/domain/respository/note_repository.dart';
 
 import '../../common/error/failure.dart';
 import '../../common/usecase/usecase.dart';
+import '../repository/note_repository.dart';
 
 class GetAllNoteUseCase extends UseCase<List<NoteModel>, NoParams> {
   final NoteRepository _noteRepository;
